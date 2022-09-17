@@ -1,0 +1,401 @@
+.mwt-chat {
+	display: flex;
+	height: 750px;
+	background-color: $lightColor;
+	border: 1px solid $borderColor;
+	position: relative;
+	overflow: hidden;
+
+	@media (max-width: 1199px) {
+		&__menu {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			right: 100%;
+			transition: all 0.3s ease-in-out;
+
+			&.show {
+				right: 0;
+			}
+		}
+		&__box {
+			width: 100%;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		&__menu {
+			flex: 5;
+		}
+
+		&__box {
+			flex: 7;
+		}
+	}
+
+	&__menu {
+		//overflow: hidden;
+		border-right: 1px solid $borderColor;
+		background-color: $lightColor;
+		z-index: 10;
+
+		&-btn {
+			line-height: 1;
+			width: 30px;
+			height: 30px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid $colorMain;
+			background-color: $colorMain;
+			position: absolute;
+			top: 87px;
+			right: -1px;
+			cursor: pointer;
+			transform: translateX(100%);
+
+			.feather {
+				color: $lightColor;
+			}
+
+			&:hover {
+				background-color: $lightColor;
+
+				.feather {
+					color: $darkColor;
+				}
+			}
+		}
+
+		&-wrapper {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+		}
+
+		&-search {
+			padding: 20px 20px 0 20px;
+
+			.rs-input {
+			}
+		}
+
+		&-conversations {
+			margin-bottom: 20px;
+			flex-grow: 1;
+			overflow-y: auto;
+		}
+	}
+
+	&__box {
+		overflow: hidden;
+
+		&-wrapper {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+		}
+
+		&-header {
+			padding: 20px 20px;
+			border-bottom: 1px solid $borderColor;
+
+			&:empty {
+				border-color: transparent;
+			}
+		}
+
+		&-body {
+			padding: 30px 20px;
+			margin-bottom: 20px;
+			flex-grow: 1;
+			overflow-y: auto;
+			display: flex;
+			flex-direction: column;
+		}
+
+		&-footer {
+			padding: 20px;
+			border-top: 1px solid $borderColor;
+
+			&-message-wrapper {
+				display: flex;
+
+				.rs-btn {
+					min-width: auto;
+					line-height: 1;
+					padding: 5px 18px;
+					border-top: 1px solid $borderColor;
+					border-bottom: 1px solid $borderColor;
+					&:last-child {
+						border-right: 1px solid $borderColor;
+					}
+				}
+
+				.rs-input {
+					line-height: 1;
+					padding-top: 9px;
+					padding-bottom: 9px;
+				}
+
+				.rs-form-group {
+					flex-grow: 1;
+					margin-bottom: 0 !important;
+				}
+			}
+		}
+	}
+}
+
+.conversation-item {
+	display: flex;
+	position: relative;
+	padding: 20px;
+	border-bottom: 1px solid $borderColor;
+	transition: all 0.3s ease-in-out;
+
+	&.active,
+	&:hover {
+		cursor: pointer;
+		border-color: $colorMain;
+	}
+
+	& + & {
+		margin-top: 10px;
+	}
+
+	&__media {
+		max-width: 50px;
+		margin-right: 10px;
+		flex-shrink: 0;
+
+		img {
+			border-radius: 50%;
+			object-fit: cover;
+		}
+
+		div {
+			display: inline-flex;
+			position: relative;
+		}
+	}
+
+	&__status {
+		display: inline-block;
+		width: 12px;
+		height: 12px;
+		background-color: $colorWarning;
+		border-radius: 50%;
+		position: absolute;
+		bottom: 5px;
+		right: 0;
+		border: 2px solid $lightColor;
+
+		&.online {
+			background-color: $colorSuccess;
+		}
+	}
+
+	&__description {
+		flex-grow: 1;
+		margin-right: 10px;
+		overflow: hidden;
+
+		&-name {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: pre;
+			margin-bottom: 10px;
+			font-size: 20px;
+		}
+
+		&-last-message {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: pre;
+		}
+	}
+
+	&__meta {
+		flex-shrink: 0;
+		width: 120px;
+		font-size: 14px;
+		text-align: right;
+		padding-top: 8px;
+
+		&-count-unread-message {
+			span {
+				border-radius: 50%;
+				padding: 2px;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				background: rgba($colorMain, 10%);
+				color: $colorMain;
+				width: 20px;
+				height: 20px;
+				font-size: 12px;
+				font-weight: 500;
+			}
+		}
+	}
+}
+
+.receiver-info {
+	display: flex;
+	align-items: center;
+
+	&__author {
+		display: inline-flex;
+		align-items: center;
+		flex-shrink: 0;
+		max-width: 50%;
+		overflow: hidden;
+
+		&-media {
+			margin-right: 10px;
+			position: relative;
+
+			img {
+				border-radius: 50%;
+				object-fit: cover;
+			}
+		}
+
+		&-content {
+			overflow: hidden;
+			h5 {
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				font-size: 20px;
+
+				@media (max-width: 767px) {
+					font-size: 16px;
+				}
+			}
+		}
+	}
+
+	&__body {
+		text-align: right;
+		flex-grow: 1;
+		margin-right: 20px;
+	}
+
+	&__actions {
+		flex-shrink: 0;
+		position: relative;
+
+		.rs-dropdown {
+			button {
+				border-radius: 0;
+				font-size: 40px;
+				line-height: 0.5;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 5px;
+				background-color: transparent;
+			}
+		}
+	}
+
+	.status {
+		position: absolute;
+		right: 0;
+		bottom: 6px;
+		display: inline-block;
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		background-color: $colorWarning;
+		border: 2px solid $lightColor;
+
+		&.online {
+			background-color: $colorSuccess;
+		}
+	}
+}
+
+.message-item {
+	display: inline-flex;
+	max-width: 80%;
+	margin-right: auto;
+
+	&:not(:last-child) {
+		margin-bottom: 20px;
+	}
+
+	&-media {
+		flex-shrink: 0;
+		margin-right: 10px;
+
+		img {
+			border-radius: 50%;
+			object-fit: cover;
+		}
+	}
+
+	&-body {
+		flex-grow: 1;
+
+		&-date {
+			font-size: 14px;
+			color: $lightFontColor;
+			margin-bottom: 5px;
+		}
+
+		&-content {
+			background-color: $borderColor;
+			padding: 5px;
+			border-radius: 0 5px 5px 5px;
+		}
+
+		&-offer {
+			background-color: $lightColor;
+			border-radius: 5px;
+			border: 1px solid $borderColor;
+			padding: 10px;
+
+			.product {
+				display: flex;
+				flex-wrap: wrap;
+
+				.image {
+					display: grid;
+					border-radius: 10px;
+					overflow: hidden;
+					margin-right: 10px;
+					flex-shrink: 0;
+				}
+
+				.content {
+					flex-grow: 1;
+					width: 200px;
+				}
+			}
+
+			.text {
+			}
+		}
+	}
+
+	&.own {
+		margin-left: auto;
+		margin-right: 0;
+
+		.message-item {
+			&-body {
+				&-date {
+					text-align: right;
+				}
+
+				&-content {
+					background-color: rgba($colorMain, 10%);
+					border-radius: 5px 5px 0 5px;
+				}
+			}
+		}
+	}
+}
